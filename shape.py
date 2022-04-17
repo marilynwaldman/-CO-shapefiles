@@ -8,32 +8,20 @@ import pandas
 #data = gpd.read_file(fp)
 
 #geodf = gpd.read_file('CO_precincts/co_precincts.shp')
-#geodf = geodf.to_crs("epsg:3395") #Mercator-projection
+#geodf = geodf.to_crs("epsg:4269") #Mercator-projection
 
 #geodf.to_file("./CO_precincts.geojson", driver = "GeoJSON")
-with open("./CO_precincts.geojson") as geofile:
-    j_file = json.load(geofile)
+with open("./CO_precincts.geojson") as geofile1:
+    j_file1 = json.load(geofile1)
 
-print(j_file.keys())
+print(j_file1.keys())
 
-i=1
-for feature in j_file["features"]:
-    feature ['id'] = str(i).zfill(2)
-    i += 1
+  
+print(j_file1.keys())
 
-print(type(j_file['features'][0]))
-print(j_file['features'][0])
-print(j_file['features'][0].keys())    
+print(j_file1['crs'])
 
 
+print(type(j_file1['features'][0]))
 
-
-
-#print(geodf)
-##print(type(data))
-#print(data.columns)
-#print(data.head())
-#print(data[['NAME','COUNTYFP', 'CD116FP']])
-#df = data.sort_values(by=['NAME'])
-#print(df)
-#
+print(j_file1['features'][0].keys())

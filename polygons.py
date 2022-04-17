@@ -12,20 +12,11 @@ import io
 import numpy as np
 
 fp = "CO_precincts/co_precincts.shp"
-data = gpd.read_file(fp)
-
-#initialize county polygons
-
 filename = './CO_precincts.geojson'
+file=open(filename)
+precincts_gdf = gpd.read_file(file)
+print(precincts_gdf.head(1))
 
-with open("./CO_precincts.geojson") as geofile:
-    precincts_gdf = json.load(geofile)
-
-
-i=1
-for feature in precincts_gdf["features"]:
-    feature ['id'] = int(i)
-    i += 1
 
 ##file=open(filename)
 #precincts_gdf = gpd.read_file(file)
@@ -62,12 +53,11 @@ def plot_map(df, precincts_gdf):
     fig.update_layout(
         mapbox={
             "style":"open-street-map",
-            "zoom": 5,
+            "zoom": 7,
             "center" :  go.layout.mapbox.Center(lat= 38.9, lon=-106.06),
             "layers":[
                 {
-                    "source": precincts_gdf,
-                    "locations" : precincts_gdf['features']['id'],
+                    "source": json.loads(precincts_gdf.geometry.to_json()),
                     "below":"traces",
                     "type":"line",
                     "color":"purple",
