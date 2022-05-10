@@ -104,7 +104,7 @@ def get_map_attributes(counties_gdf):
     colors = counties_gdf['Color'].astype(str)
     for i in range(0,len(counties_gdf['County'])):
         labels.append(counties_gdf['County'][i] + '\nRep: '+reps[i] + '\nUAF: '+uafs[i]+'\nDems: '+dems[i])
-
+    counties_gdf.to_csv("./countystuff.csv",index=False)
     lats = lats.tolist()
     lons = lons.tolist()
     sizes = sizes.tolist()
@@ -132,5 +132,8 @@ if __name__ == '__main__':
     df_max = find_max(df_party_totals)
     #print(df_max[['Republicans','Democrats','Unaffiliated','maxParty','maxPartyValue']])
     df_join = join_geocoordinates(df_max, df_counties)
+    
     print(df_join.head(2))
     print(df_join.columns)
+    x,y,z,a,b = get_map_attributes(df_join)
+
